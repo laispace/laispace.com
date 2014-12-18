@@ -1,0 +1,7 @@
+.idea/
+.deploy/
+public/
+node_modules/
+node-debug.log
+
+.DS_Store
