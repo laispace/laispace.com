@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>NODEJS-Buffer对象 | Laispace - 来思碑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="构造一个指定大小的 buffer
+  var newBuffer = new Buffer(1024);
+  // var len = newBuffer.length;
+
+用指定值初始化 buffer 的内容
+  // 填充第10字节开始的内容为 1 
+  newBuffer.fill(1, 10);
+  // 填充第10~20字节的内容为 2 
+  newBuffer.fill(2, 10,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NODEJS-Buffer对象">
+<meta property="og:url" content="http://laispace.github.io/2014/05/nodejs-buffer对象/">
+<meta property="og:site_name" content="Laispace - 来思碑">
+<meta property="og:description" content="构造一个指定大小的 buffer
+  var newBuffer = new Buffer(1024);
+  // var len = newBuffer.length;
+
+用指定值初始化 buffer 的内容
+  // 填充第10字节开始的内容为 1 
+  newBuffer.fill(1, 10);
+  // 填充第10~20字节的内容为 2 
+  newBuffer.fill(2, 10,">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NODEJS-Buffer对象">
+<meta name="twitter:description" content="构造一个指定大小的 buffer
+  var newBuffer = new Buffer(1024);
+  // var len = newBuffer.length;
+
+用指定值初始化 buffer 的内容
+  // 填充第10字节开始的内容为 1 
+  newBuffer.fill(1, 10);
+  // 填充第10~20字节的内容为 2 
+  newBuffer.fill(2, 10,">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Laispace - 来思碑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Laispace - 来思碑</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">天酬勤笨先飞，乐观进取。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/git">GIT</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/web">WEB</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/codereading">SVN</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/archives">归档</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/about">关于</a>
+            </li>
+          
+        </ul>
+
+<!--         
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+         -->
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+          <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://laispace.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodejs-buffer对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/05/nodejs-buffer对象/" class="article-date">
+  <time datetime="2014-05-09T13:19:42.000Z" itemprop="datePublished">5月 9 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Node/">Node<span class="article-category-count">25</span></a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NODEJS-Buffer对象
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <ul>
+<li><p>构造一个指定大小的 buffer</p>
+<pre><code>  <span class="keyword">var</span> newBuffer = <span class="keyword">new</span> Buffer(<span class="number">1024</span>);
+  <span class="comment">// var len = newBuffer.length;</span>
+</code></pre></li>
+<li><p>用指定值初始化 buffer 的内容</p>
+<pre><code>  <span class="comment">// 填充第10字节开始的内容为 1 </span>
+  newBuffer.fill(<span class="number">1</span>, <span class="number">10</span>);
+  <span class="comment">// 填充第10~20字节的内容为 2 </span>
+  newBuffer.fill(<span class="number">2</span>, <span class="number">10</span>, <span class="number">20</span>);
+</code></pre></li>
+<li><p>用数组初始化 buffer 的内容</p>
+<pre><code>  <span class="comment">// 用数组 [0, 1, 2] 初始化</span>
+  <span class="keyword">var</span> newBuffer = newBuffer([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]) 
+</code></pre></li>
+<li><p>用字符串初始化 buffer 的内容</p>
+<pre><code>  // 用字符串 <span class="attribute">'xiaolai</span>' 初始化
+  var newBuffer = <span class="keyword">new</span> <span class="keyword">Buffer</span>(<span class="attribute">'xiaolai</span>');
+  // 指定编码, 默认为 utf8，可选 ascii/utf8/utf16le/ucs2/base64/hex 等编码格式
+  // var newBuffer = <span class="keyword">new</span> <span class="keyword">Buffer</span>(<span class="attribute">'xiaolai</span>', <span class="attribute">'utf8</span>');
+</code></pre></li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li><p>取出 buffer 中的字节        </p>
+<pre><code>  <span class="comment">// 取出第2~4个字节</span>
+  <span class="keyword">var</span> buff = newBuffer.slice(<span class="number">2</span>, <span class="number">4</span>);    
+</code></pre></li>
+<li><p>将 buffer 转化为字符串</p>
+<pre><code>  <span class="comment">// Buffer.toString([encoding], [start], [end])</span>
+  <span class="comment">// 默认以uft-8 编码，将 buffer 转化为字符串</span>
+  <span class="keyword">var</span> str = newbuffer.<span class="built_in">toString</span>();
+  <span class="comment">// 以uft-8 编码，将第4~10字节转化为字符串</span>
+  <span class="keyword">var</span> str = newbuffer.<span class="built_in">toString</span>('utf8', <span class="number">4</span>, <span class="number">10</span>);
+</code></pre></li>
+<li><p>将字符串写入已有的 buffer 中</p>
+<pre><code>  // Buffer.<span class="keyword">write</span>(<span class="built_in">string</span>, [offset], [length], [encoding]);
+  // 在 newBuffer 的第<span class="number">3</span>个字节后插入长度为<span class="number">3</span>的字符串 <span class="string">"赖"</span>
+  newBuffer.<span class="keyword">write</span>(<span class="string">'赖'</span>, <span class="number">3</span>, <span class="number">3</span>)    
+</code></pre></li>
+<li><p>使用 string_decoder 模块解决中文被截断乱码的问题</p>
+<p>  使用场景：在 utf-8 编码中，『赖小赖』这三个字占用9个字节，如果将这九个字节分为两个buffer，一个5字节另一个4字节，分别打印时就会乱码了（因为一个汉子占用3字节）. 在遇上长字符串时虽然可以将多个这样的buffer使用concact()方法合并后再调用toString()方法输出，但性能不好。</p>
+<pre><code>  <span class="comment">// 使用 string_decoder 模块解决这个问题</span>
+  <span class="keyword">var</span> StringDecoder = <span class="keyword">require</span>(<span class="string">'string_decoder'</span>).StringDecoder;
+  <span class="keyword">var</span> decoder = <span class="keyword">new</span> StringDecoder();
+  <span class="comment">// 分别解码</span>
+  decoder.<span class="keyword">write</span>(str1); <span class="comment">// '赖'</span>
+  decoder.<span class="keyword">write</span>(str2); <span class="comment">// '小赖'</span>
+</code></pre></li>
+<li><p>使用 JSON.stringify() 将 buffer 转换为字符串</p>
+<pre><code>  <span class="keyword">var</span> newBuffer = <span class="keyword">new</span> Buffer(<span class="string">'我叫赖小赖'</span>);
+  <span class="keyword">var</span> json = <span class="built_in">JSON</span>.stringify(newBuffer);
+  <span class="comment">//使用 JSON.parse() 将转化后的字符串转化为数组</span>
+  <span class="keyword">var</span> arr = <span class="built_in">JSON</span>.parse(json);
+</code></pre></li>
+<li><p>复制 buffer 到另一个 buffer</p>
+<pre><code>  <span class="comment">// Buffer.copy(targetBuffer, [targetStart], [sourceStart], [sourceEnd])</span>
+  <span class="keyword">var</span> oldBuffer = <span class="keyword">new</span> Buffer(<span class="string">'我叫赖小赖'</span>);
+  <span class="keyword">var</span> newBuffer = <span class="keyword">new</span> Buffer(<span class="number">1024</span>);
+  <span class="comment">// 将 oldBuffer 复制到 newBuffer;</span>
+  oldBuffer.<span class="keyword">copy</span>(newBuffer);    
+</code></pre></li>
+<li><p>Buffer.isBuffer(object) 判断是否为 Buffer对象            </p>
+<pre><code><span class="attribute">  var isObjBuffer </span>=<span class="string"> Buffer.isBuffer(obj);</span>
+</code></pre></li>
+<li><p>Buffer.byteLength(string, [encoding]) 计算字符串的字节数</p>
+<pre><code>  <span class="keyword">var</span> str = <span class="string">'赖小赖'</span>;
+  <span class="keyword">var</span> byteLen = Buffer.byteLength(str);    
+</code></pre></li>
+<li><p>Buffer.concat(BufferList, [totalLength]) 将多个 Buffer 合并为一个</p>
+<pre><code>  <span class="keyword">var</span> str1 = <span class="keyword">new</span> Buffer(<span class="string">'我'</span>);    
+  <span class="keyword">var</span> str2 = <span class="keyword">new</span> Buffer(<span class="string">'叫'</span>);    
+  <span class="keyword">var</span> str3 = <span class="keyword">new</span> Buffer(<span class="string">'小'</span>);    
+  <span class="keyword">var</span> str4 = <span class="keyword">new</span> Buffer(<span class="string">'赖'</span>);
+  <span class="keyword">var</span> str5 = Buffer.concat([str1, str2, str3, str4]); 
+  <span class="built_in">console</span>.log(str5.toString()); <span class="comment">// "我叫小赖"    </span>
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!--
+      <a data-url="http://laispace.github.io/2014/05/nodejs-buffer对象/" data-id="qiw63ko48tk6bifx" class="article-share-link">Share</a>
+      -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/buffer/">buffer</a><span class="article-tag-list-count">2</span></li></ul>
+
+      
+      <section id="comments">
+        <div class="ds-thread" data-thread-key="qiw63ko48tk6bifx" data-title="NODEJS-Buffer对象" data-url="http://laispace.github.io/2014/05/nodejs-buffer对象/"></div>
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"laispace"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      </section>
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/05/nodejs-fs模块操作文件系统/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NODEJS-fs模块操作文件系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/04/NPM SSL错误的解决/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NPM SSL错误的解决</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/12/JavaScript 碎片/">JavaScript 碎片</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/移动 Web 开发技巧/">移动 Web 开发技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/Web-worker-的简单使用/">Web worker 的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/常用字符集和编码格式/">常用字符集和编码格式</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/【译】ES6 Generators（4）并发篇/">【译】ES6 Generators（4）并发篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/-crawler-spider/" style="font-size: 10.00px;">-crawler -spider</a><a href="/tags/-linux/" style="font-size: 10.00px;">-linux</a><a href="/tags/Child-process/" style="font-size: 10.00px;">Child_process</a><a href="/tags/Cluster/" style="font-size: 10.00px;">Cluster</a><a href="/tags/ES6/" style="font-size: 20.00px;">ES6</a><a href="/tags/FormData/" style="font-size: 10.00px;">FormData</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/HTTP/" style="font-size: 10.00px;">HTTP</a><a href="/tags/HTTPS/" style="font-size: 10.00px;">HTTPS</a><a href="/tags/Mongo/" style="font-size: 10.00px;">Mongo</a><a href="/tags/NPM/" style="font-size: 10.00px;">NPM</a><a href="/tags/Node/" style="font-size: 15.00px;">Node</a><a href="/tags/Node-modules/" style="font-size: 10.00px;">Node modules</a><a href="/tags/Notes/" style="font-size: 15.00px;">Notes</a><a href="/tags/Notification/" style="font-size: 10.00px;">Notification</a><a href="/tags/Phonegap/" style="font-size: 10.00px;">Phonegap</a><a href="/tags/SAE/" style="font-size: 10.00px;">SAE</a><a href="/tags/Tools/" style="font-size: 10.00px;">Tools</a><a href="/tags/Ubuntu/" style="font-size: 10.00px;">Ubuntu</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/animate/" style="font-size: 10.00px;">animate</a><a href="/tags/async/" style="font-size: 10.00px;">async</a><a href="/tags/base64/" style="font-size: 10.00px;">base64</a><a href="/tags/blur/" style="font-size: 10.00px;">blur</a><a href="/tags/buffer/" style="font-size: 15.00px;">buffer</a><a href="/tags/bytewiser/" style="font-size: 10.00px;">bytewiser</a><a href="/tags/clearSelect/" style="font-size: 10.00px;">clearSelect</a><a href="/tags/concat-stream/" style="font-size: 10.00px;">concat-stream</a><a href="/tags/cookies/" style="font-size: 10.00px;">cookies</a><a href="/tags/css3/" style="font-size: 10.00px;">css3</a><a href="/tags/debug/" style="font-size: 10.00px;">debug</a><a href="/tags/dns/" style="font-size: 10.00px;">dns</a><a href="/tags/express/" style="font-size: 10.00px;">express</a><a href="/tags/fileupload/" style="font-size: 10.00px;">fileupload</a><a href="/tags/filter/" style="font-size: 10.00px;">filter</a><a href="/tags/flex/" style="font-size: 10.00px;">flex</a><a href="/tags/fs/" style="font-size: 15.00px;">fs</a><a href="/tags/generators/" style="font-size: 20.00px;">generators</a><a href="/tags/git/" style="font-size: 10.00px;">git</a><a href="/tags/goagent/" style="font-size: 10.00px;">goagent</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 赖小赖<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+<!--     <nav id="mobile-nav">
+  
+    <a href="/git" class="mobile-nav-link">GIT</a>
+  
+    <a href="/web" class="mobile-nav-link">WEB</a>
+  
+    <a href="/codereading" class="mobile-nav-link">SVN</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    
+
+<script src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

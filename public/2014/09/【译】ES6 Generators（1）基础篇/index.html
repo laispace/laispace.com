@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【译】ES6 Generators（1）基础篇 | Laispace - 来思碑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="译注1：此文带着自己的理解，不完全按原文翻译。原文地址
+译注2：原文晦涩难懂的地方，尽力做了注释或修饰，方便大家理解。错误之处欢迎各位校验指正。
+
+generator 即生成器，是 ES6 中众多特性中的一种，是一个新的函数类型。
+这篇文章旨在介绍 generator 的基础知识，以及告诉你在 JS 的未来，他们为何如此重要。
+运行直到完成 (Run-To-Completion)
+为了理清这个新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】ES6 Generators（1）基础篇">
+<meta property="og:url" content="http://laispace.github.io/2014/09/【译】ES6 Generators（1）基础篇/">
+<meta property="og:site_name" content="Laispace - 来思碑">
+<meta property="og:description" content="译注1：此文带着自己的理解，不完全按原文翻译。原文地址
+译注2：原文晦涩难懂的地方，尽力做了注释或修饰，方便大家理解。错误之处欢迎各位校验指正。
+
+generator 即生成器，是 ES6 中众多特性中的一种，是一个新的函数类型。
+这篇文章旨在介绍 generator 的基础知识，以及告诉你在 JS 的未来，他们为何如此重要。
+运行直到完成 (Run-To-Completion)
+为了理清这个新">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【译】ES6 Generators（1）基础篇">
+<meta name="twitter:description" content="译注1：此文带着自己的理解，不完全按原文翻译。原文地址
+译注2：原文晦涩难懂的地方，尽力做了注释或修饰，方便大家理解。错误之处欢迎各位校验指正。
+
+generator 即生成器，是 ES6 中众多特性中的一种，是一个新的函数类型。
+这篇文章旨在介绍 generator 的基础知识，以及告诉你在 JS 的未来，他们为何如此重要。
+运行直到完成 (Run-To-Completion)
+为了理清这个新">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Laispace - 来思碑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Laispace - 来思碑</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">天酬勤笨先飞，乐观进取。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/git">GIT</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/web">WEB</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/codereading">SVN</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/archives">归档</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/about">关于</a>
+            </li>
+          
+        </ul>
+
+<!--         
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+         -->
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+          <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://laispace.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-【译】ES6 Generators（1）基础篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/【译】ES6 Generators（1）基础篇/" class="article-date">
+  <time datetime="2014-09-27T10:45:45.000Z" itemprop="datePublished">9月 27 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Translate/">Translate<span class="article-category-count">5</span></a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【译】ES6 Generators（1）基础篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行直到完成_(Run-To-Completion)"><span class="toc-number">1.</span> <span class="toc-text">运行直到完成 (Run-To-Completion)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运行可被中止_(Run-Stop-Run)"><span class="toc-number">2.</span> <span class="toc-text">运行可被中止 (Run..Stop..Run)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成器的语法"><span class="toc-number">3.</span> <span class="toc-text">生成器的语法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成器迭代器(Generator_Iterator)"><span class="toc-number">4.</span> <span class="toc-text">生成器迭代器(Generator Iterator)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        <blockquote>
+<p>译注1：此文带着自己的理解，不完全按原文翻译。<a href="http://davidwalsh.name/es6-generators" target="_blank" rel="external">原文地址</a></p>
+<p>译注2：原文晦涩难懂的地方，尽力做了注释或修饰，方便大家理解。错误之处欢迎各位校验指正。</p>
+</blockquote>
+<p><em>generator</em> 即生成器，是 ES6 中众多特性中的一种，是一个新的函数类型。</p>
+<p>这篇文章旨在介绍 generator 的基础知识，以及告诉你在 JS 的未来，他们为何如此重要。</p>
+<h1 id="运行直到完成_(Run-To-Completion)">运行直到完成 (Run-To-Completion)</h1>
+<p>为了理清这个新的函数类型和其他函数类型有何区别，我们首先需要了解 『run to completion』 的概念。</p>
+<p>我们知道 JS 是单线程的，所以一旦一个函数开始执行，排在队列后边的函数就必须等待这个函数执行完毕。</p>
+<p>举个栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"Hello World"</span>);</div><div class="line">},<span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="comment">// 注意: 永远不要使用这种超长的循环，这里只是为了演示方便</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;=<span class="number">1E10</span>; i++) {</div><div class="line">        <span class="built_in">console</span>.log(i);</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line">foo();</div><div class="line"><span class="comment">// 0..1E10</span></div><div class="line"><span class="comment">// "Hello World"</span></div></pre></td></tr></table></figure>
+
+<p>在这段代码中，我们先执行了 <code>foo()</code> 然后执行 <code>setTimeout</code>，而 <code>foo()</code> 中的 for 循环将花费超长的时间才能完成。</p>
+<p>只有等待这个漫长的循环结束后，<code>setTimeout</code> 中的 <code>console.log(&#39;Hello World&#39;)</code> 才能执行。</p>
+<p>如果 <code>foo()</code> 函数能够被中断会怎样呢？</p>
+<p>这是多线程编程语言的挑战，但我们并不需要考虑这个，因为 JS 是单线程的。</p>
+<h1 id="运行可被中止_(Run-Stop-Run)">运行可被中止 (Run..Stop..Run)</h1>
+<p>使用 ES6 的生成器特性，我们有了一种新的函数类型：</p>
+<p>允许这个函数的执行被中断一次或多次，在中断的期间我们可以去做其他操作，完成后再回来恢复这个函数的执行。</p>
+<p>如果你了解过其他并发型或多线程的语言的话，你可能知道『协作(cooperative)』：</p>
+<p>在一个函数执行期间，允许执行中断，在中断期间与其他代码进行协作。</p>
+<p>ES6 生成器函数在并发行为中体现了这种『协作』的特性。</p>
+<p>在生成器函数体中，我们可以使用一个新的 <code>yield</code> 关键字在内部来中断函数的执行。</p>
+<p>需要注意的是，生成器并不能恢复自己中断的执行，我们需要一个额外的控制来恢复函数的执行。</p>
+<p>所以，一个生成器函数能够被中断和重启。那生成器函数中断自己的执行后，怎么才知道何时恢复执行呢？</p>
+<p>我们可以使用 <code>yield</code> 来对外发送中断的信号，当外部返回信号时再恢复函数的执行。</p>
+<h1 id="生成器的语法">生成器的语法</h1>
+<p>我们可以这样声明一个生成器函数：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> *foo() {</div><div class="line">    // <span class="keyword">...</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>注意这里的星号(*)即声明了这个函数是属于生成器类型的函数。</p>
+<p>生成器函数大多数功能与普通函数没有区别，只有一部分新颖的语法需要学习。</p>
+<p>先介绍一个 <code>yield</code> 关键字：</p>
+<p><code>yield ___</code> 也叫做 『yield 表达式』，当我们重启生成器时，会向函数内部传值，这个值为对应的 <code>yield ___</code> 表达式的计算结果。</p>
+<p>举个栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> x = <span class="number">1</span> + (<span class="keyword">yield</span> <span class="string">"foo"</span>);</div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>在这段代码中， <code>yield &quot;foo&quot;</code> 表达式将在函数中断时，向外部发送 “foo” 这个值，且当这个生成器重启时，外部传入的值将作为这个表达式的结果：</p>
+<p>在这里，外部传入的值将会与 <code>1</code> 进行相加操作，然后赋值给 <code>x</code>。</p>
+<p>看到双向通信的特点了么？我们在生成器内部向外发送 “foo” 然后中断函数执行，然后当生成器接收到外部传入一个值时，生成器将重启，函数将恢复执行。</p>
+<p>如果我们只是向中止函数而不对外传值时，只使用 <code>yield</code> 即可：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注意: `foo(..)` 在这里并不是一个生成器</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"x: "</span> + x);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">bar</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">yield</span>; <span class="comment">// 只是中断，而不向外传值</span></div><div class="line">    foo( <span class="keyword">yield</span> ); <span class="comment">// 当外部传回一个值时，将执行 foo() 操作</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h1 id="生成器迭代器(Generator_Iterator)">生成器迭代器(Generator Iterator)</h1>
+<p>迭代器是一种设计模式，定义了一种特殊的行为：</p>
+<p>我们通过 <code>next()</code> 来获取一组有序的值。</p>
+<p>举个栗子：我们有个数组为 [1, 2, 3, 4, 5]，第一次调用 <code>next()</code> 将返回 1，第二次调用 <code>next()</code> 将返回 2，以此类推，当数组内的值都返回完毕时，继续调用 <code>next()</code>将返回 null 或 false。</p>
+<p>为了从外部控制生成器函数，我们使用生成器迭代器(generator iterator)来实现，举个栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">4</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">5</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>我们先定义了一个生成器函数 <code>foo()</code>，接着我们调用它一次来生成一个迭代器：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var it </span>=<span class="string"> foo();</span></div></pre></td></tr></table></figure>
+
+<p>你可能会疑问为啥我们不是使用 <code>new</code> 关键字即 <code>var it = new foo()</code> 来生成迭代器？好吧，这语法背后比较复杂已经超出了我们的讨论范围了。</p>
+<p>接下来我们就可以使用这个迭代器了：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log( it.<span class="keyword">next</span>() ); <span class="regexp">//</span> { <span class="symbol">value:</span> <span class="number">1</span>, <span class="symbol">done:</span> <span class="keyword">false</span> }</div></pre></td></tr></table></figure>
+
+<p>这里的 <code>it.next()</code> 返回 <code>{ value: 1, done: false }</code>，其中的 <code>value: 1</code> 是 <code>yield 1</code> 返回的值，而 <code>done: false</code> 表示生成器函数还没有迭代完成。</p>
+<p>继续调用 <code>it.next()</code> 进行迭代：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">console.log( it.<span class="keyword">next</span>() ); <span class="regexp">//</span> { <span class="symbol">value:</span><span class="number">2</span>, <span class="symbol">done:</span><span class="keyword">false</span> }</div><div class="line">console.log( it.<span class="keyword">next</span>() ); <span class="regexp">//</span> { <span class="symbol">value:</span><span class="number">3</span>, <span class="symbol">done:</span><span class="keyword">false</span> }</div><div class="line">console.log( it.<span class="keyword">next</span>() ); <span class="regexp">//</span> { <span class="symbol">value:</span><span class="number">4</span>, <span class="symbol">done:</span><span class="keyword">false</span> }</div><div class="line">console.log( it.<span class="keyword">next</span>() ); <span class="regexp">//</span> { <span class="symbol">value:</span><span class="number">5</span>, <span class="symbol">done:</span><span class="keyword">false</span> }</div></pre></td></tr></table></figure>
+
+<p>注意我们迭代到值为 <code>5</code>时，<code>done</code> 还是为 <code>false</code>，是因为这时候生成器函数并未处于完成状态，我们再调用一次看看：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log( it.<span class="keyword">next</span>() ); <span class="regexp">//</span> { <span class="symbol">value:</span>undefined, <span class="symbol">done:</span><span class="keyword">true</span> }</div></pre></td></tr></table></figure>
+
+<p>这时候我们已经执行完了所有的 <code>yield ___</code> 表达式，所以 <code>done</code> 已经为 <code>true</code>。</p>
+<p>你可能会好奇的是：如果我们在一个生成器函数中使用了 <code>return</code>，我们在外部还能获取到 <code>yield</code> 的值么？</p>
+<p><em>答案可以是：能</em></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> it = foo();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log( it.next() ); <span class="comment">// { value:1, done:false }</span></div><div class="line"><span class="built_in">console</span>.log( it.next() ); <span class="comment">// { value:2, done:true }</span></div></pre></td></tr></table></figure>
+
+<p>让我们看看当我们使用迭代器时，生成器怎么对外传值，以及怎么接收外部传入的值：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">(x)</span> </span>{</div><div class="line">    <span class="keyword">var</span> y = <span class="number">2</span> * (<span class="keyword">yield</span> (x + <span class="number">1</span>));</div><div class="line">    <span class="keyword">var</span> z = <span class="keyword">yield</span> (y / <span class="number">3</span>);</div><div class="line">    <span class="keyword">return</span> (x + y + z);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> it = foo( <span class="number">5</span> );</div><div class="line"></div><div class="line"><span class="comment">// 注意：这里没有给 `it.next()` 传值</span></div><div class="line"><span class="built_in">console</span>.log( it.next() );       <span class="comment">// { value:6, done:false }</span></div><div class="line"><span class="built_in">console</span>.log( it.next( <span class="number">12</span> ) );   <span class="comment">// { value:8, done:false }</span></div><div class="line"><span class="built_in">console</span>.log( it.next( <span class="number">13</span> ) );   <span class="comment">// { value:42, done:true }</span></div></pre></td></tr></table></figure>
+
+<p>我们传入参数 <code>5</code> 先初始化了一个迭代器。</p>
+<p>第一个 <code>next()</code> 中没有传递参数进去，因为这个生成器函数中没有对应的 <code>yield</code> 来接收参数，所以如果我们在第一个 <code>next()</code> 强制传参进去的话，什么都不会发生。<br>第一个 <code>yield (x+1)</code> 将返回 <code>value: 6</code> 到外部，此时生成器未迭代完毕，所以同时返回 <code>done: false</code> 。</p>
+<p>第二个 <code>next(12)</code> 中我们传递了参数 <code>12</code> 进去，则表达式 <code>yield(x+1)</code> 会被赋值为 12，相当于：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">5</span>;</div><div class="line"><span class="keyword">var</span> y = <span class="number">2</span> * <span class="number">12</span>; <span class="comment">// =&gt; 24</span></div></pre></td></tr></table></figure>
+
+<p>第二个 <code>yield (y/3)</code> 将返回 <code>value: 8</code> 到外部，此时生成器未迭代完毕，所以同时返回 <code>done: false</code> 。</p>
+<p>同理，在第三个 <code>next(13)</code> 中我们传递了参数 <code>13</code> 进去，则表达式 <code>yield(y/3)</code> 会被赋值为 13，相当于：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">5</span></div><div class="line"><span class="keyword">var</span> y = <span class="number">24</span>;</div><div class="line"><span class="keyword">var</span> z = <span class="number">13</span>;</div></pre></td></tr></table></figure>
+
+<p>第三个 <code>yield</code>并不存在，所以会 <code>return (x + y + z)</code> 即返回 <code>value: 42</code> 到外部，此时生成器已迭代完毕，所以同时返回 <code>done: true</code> 。</p>
+<p><em>答案也可以是：不能！</em></p>
+<p>依赖  <code>return</code> 从生成器中返回一个值并不好，因为当生成器遇见了 <code>for..of</code> 循环的时候，被返回的值将会被丢弃，举个栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">4</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">5</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">6</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> v of foo()) {</div><div class="line">    <span class="built_in">console</span>.log( v );</div><div class="line">}</div><div class="line"><span class="comment">// 1 2 3 4 5</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log( v ); <span class="comment">// 仍然是 `5`, 而不是 `6`</span></div></pre></td></tr></table></figure>
+
+<p>看到了吧？由 <code>foo()</code> 创建的迭代器会被 <code>foo..of</code> 循环自动捕获，且会自动进行一个接一个的迭代，直到遇到 <code>done: true</code>，就结束了，并没有处理 <code>return</code> 的值。</p>
+<p>所以，<code>for..of</code> 循环会忽略被返回的 <code>6</code>，同时因为没有暴露出 <code>next()</code> 方法，<code>for..of</code> 循环就不能用于我们在中断生成器的期间，对生成器进行传值的场景。</p>
+<h1 id="总结">总结</h1>
+<p>看了以上 ES6 Generators 的基础知识，很自然地就会想我们在什么场景下会用到这个新颖的生成器呢？</p>
+<p>当然有很多的场景能发挥生成器的这些特性了，这篇文章只是抛砖引玉，我们将继续深入挖掘生成器的魔力！</p>
+<p>当你在最新的 Chrome nightly 或 canary 版，或 Firefox nightly版，甚至在 v0.11+ 版本的 node （带 —harmony 开启 ES6 功能）中运行了以上这些代码片段后，我们可能会产生以下疑问：</p>
+<ol>
+<li>怎么进行错误处理呢？</li>
+<li>一个生成器怎么调用另一个生成器呢？</li>
+<li>怎么异步地使用生成器呢？</li>
+</ol>
+<p>别担心，请听下回分解：）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!--
+      <a data-url="http://laispace.github.io/2014/09/【译】ES6 Generators（1）基础篇/" data-id="mad136r7o0ygzh84" class="article-share-link">Share</a>
+      -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a><span class="article-tag-list-count">4</span></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/generators/">generators</a><span class="article-tag-list-count">4</span></li></ul>
+
+      
+      <section id="comments">
+        <div class="ds-thread" data-thread-key="mad136r7o0ygzh84" data-title="【译】ES6 Generators（1）基础篇" data-url="http://laispace.github.io/2014/09/【译】ES6 Generators（1）基础篇/"></div>
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"laispace"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      </section>
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/09/【译】ES6 Generators（2）深入篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【译】ES6 Generators（2）深入篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/09/慎用text-indent的负值/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">慎用text-indent的负值</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/12/JavaScript 碎片/">JavaScript 碎片</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/移动 Web 开发技巧/">移动 Web 开发技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/Web-worker-的简单使用/">Web worker 的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/常用字符集和编码格式/">常用字符集和编码格式</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/【译】ES6 Generators（4）并发篇/">【译】ES6 Generators（4）并发篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/-crawler-spider/" style="font-size: 10.00px;">-crawler -spider</a><a href="/tags/-linux/" style="font-size: 10.00px;">-linux</a><a href="/tags/Child-process/" style="font-size: 10.00px;">Child_process</a><a href="/tags/Cluster/" style="font-size: 10.00px;">Cluster</a><a href="/tags/ES6/" style="font-size: 20.00px;">ES6</a><a href="/tags/FormData/" style="font-size: 10.00px;">FormData</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/HTTP/" style="font-size: 10.00px;">HTTP</a><a href="/tags/HTTPS/" style="font-size: 10.00px;">HTTPS</a><a href="/tags/Mongo/" style="font-size: 10.00px;">Mongo</a><a href="/tags/NPM/" style="font-size: 10.00px;">NPM</a><a href="/tags/Node/" style="font-size: 15.00px;">Node</a><a href="/tags/Node-modules/" style="font-size: 10.00px;">Node modules</a><a href="/tags/Notes/" style="font-size: 15.00px;">Notes</a><a href="/tags/Notification/" style="font-size: 10.00px;">Notification</a><a href="/tags/Phonegap/" style="font-size: 10.00px;">Phonegap</a><a href="/tags/SAE/" style="font-size: 10.00px;">SAE</a><a href="/tags/Tools/" style="font-size: 10.00px;">Tools</a><a href="/tags/Ubuntu/" style="font-size: 10.00px;">Ubuntu</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/animate/" style="font-size: 10.00px;">animate</a><a href="/tags/async/" style="font-size: 10.00px;">async</a><a href="/tags/base64/" style="font-size: 10.00px;">base64</a><a href="/tags/blur/" style="font-size: 10.00px;">blur</a><a href="/tags/buffer/" style="font-size: 15.00px;">buffer</a><a href="/tags/bytewiser/" style="font-size: 10.00px;">bytewiser</a><a href="/tags/clearSelect/" style="font-size: 10.00px;">clearSelect</a><a href="/tags/concat-stream/" style="font-size: 10.00px;">concat-stream</a><a href="/tags/cookies/" style="font-size: 10.00px;">cookies</a><a href="/tags/css3/" style="font-size: 10.00px;">css3</a><a href="/tags/debug/" style="font-size: 10.00px;">debug</a><a href="/tags/dns/" style="font-size: 10.00px;">dns</a><a href="/tags/express/" style="font-size: 10.00px;">express</a><a href="/tags/fileupload/" style="font-size: 10.00px;">fileupload</a><a href="/tags/filter/" style="font-size: 10.00px;">filter</a><a href="/tags/flex/" style="font-size: 10.00px;">flex</a><a href="/tags/fs/" style="font-size: 15.00px;">fs</a><a href="/tags/generators/" style="font-size: 20.00px;">generators</a><a href="/tags/git/" style="font-size: 10.00px;">git</a><a href="/tags/goagent/" style="font-size: 10.00px;">goagent</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 赖小赖<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+<!--     <nav id="mobile-nav">
+  
+    <a href="/git" class="mobile-nav-link">GIT</a>
+  
+    <a href="/web" class="mobile-nav-link">WEB</a>
+  
+    <a href="/codereading" class="mobile-nav-link">SVN</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    
+
+<script src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

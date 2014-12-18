@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>NODEJS-fs模块操作文件系统 | Laispace - 来思碑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用 fs模块 对文件/目录进行操作
+
+读取文件内容
+  // fs.readFile(filename, [options], callback) 
+  // options 中的 flag 默认为 r，表示读取文件
+  fs.readFile('test.txt', function (err, data) {
+      if(err) throw err;
+      console.lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NODEJS-fs模块操作文件系统">
+<meta property="og:url" content="http://laispace.github.io/2014/05/nodejs-fs模块操作文件系统/">
+<meta property="og:site_name" content="Laispace - 来思碑">
+<meta property="og:description" content="使用 fs模块 对文件/目录进行操作
+
+读取文件内容
+  // fs.readFile(filename, [options], callback) 
+  // options 中的 flag 默认为 r，表示读取文件
+  fs.readFile('test.txt', function (err, data) {
+      if(err) throw err;
+      console.lo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NODEJS-fs模块操作文件系统">
+<meta name="twitter:description" content="使用 fs模块 对文件/目录进行操作
+
+读取文件内容
+  // fs.readFile(filename, [options], callback) 
+  // options 中的 flag 默认为 r，表示读取文件
+  fs.readFile('test.txt', function (err, data) {
+      if(err) throw err;
+      console.lo">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Laispace - 来思碑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Laispace - 来思碑</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">天酬勤笨先飞，乐观进取。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/git">GIT</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/web">WEB</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/codereading">SVN</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/archives">归档</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/about">关于</a>
+            </li>
+          
+        </ul>
+
+<!--         
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+         -->
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+          <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://laispace.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodejs-fs模块操作文件系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/05/nodejs-fs模块操作文件系统/" class="article-date">
+  <time datetime="2014-05-09T13:19:42.000Z" itemprop="datePublished">5月 9 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Node/">Node<span class="article-category-count">25</span></a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NODEJS-fs模块操作文件系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_fs模块_对文件/目录进行操作"><span class="toc-number">1.</span> <span class="toc-text">使用 fs模块 对文件/目录进行操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_path模块_对路径进行操作"><span class="toc-number">2.</span> <span class="toc-text">使用 path模块 对路径进行操作</span></a></li></ol>
+        <h2 id="使用_fs模块_对文件/目录进行操作">使用 fs模块 对文件/目录进行操作</h2>
+<ul>
+<li><p>读取文件内容</p>
+<pre><code>  <span class="comment">// fs.readFile(filename, [options], callback) </span>
+  <span class="comment">// options 中的 flag 默认为 r，表示读取文件</span>
+  fs.readFile(<span class="string">'test.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, data)</span> </span>{
+      <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;
+      <span class="built_in">console</span>.log(<span class="string">'文件内容是：'</span>, data);
+  })
+</code></pre></li>
+</ul>
+<pre><code>    <span class="comment">// fs.readFileSync(filename, [options]) </span>
+    <span class="comment">// 同步方式读取</span>
+    <span class="keyword">try</span> {
+        <span class="keyword">var</span> data = fs.readFileSync(<span class="string">'test.txt'</span>);
+        <span class="built_in">console</span>.log(<span class="string">'文件内容是：'</span>, data);
+    } <span class="keyword">catch</span> (err) {
+        <span class="keyword">throw</span> err;
+    }
+</code></pre><a id="more"></a>
+
+<pre><code><span class="keyword">options</span> 中的 flag 取值：r<span class="regexp">/r+/</span>rs<span class="regexp">/w/</span>wx<span class="regexp">/w+/</span>wx+<span class="regexp">/a/</span>ax<span class="regexp">/a+/</span>ax+
+
+<span class="keyword">options</span> 中的 encoding 取值：utf8<span class="regexp">/ascii/</span>base64
+</code></pre><ul>
+<li><p>写入文件内容</p>
+<pre><code>  <span class="comment">// fs.writeFile(filename, data, [options], callback)</span>
+  <span class="comment">// options 中的 flag 默认为 w，表示写入文件，mode 默认为 0666（可读写的读写权限）</span>
+  fs.writeFile(<span class="string">'test.txt'</span>, <span class="string">'我是被写入的内容'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>{
+      <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;
+      console.log(<span class="string">'成功写入.'</span>)
+  })        
+
+  <span class="comment">// 同步方式写入</span>
+  fs.writeFile(filename, data, [options])
+
+  <span class="comment">// 将 data 添加到文件底部, flag 默认为 a</span>
+  fs.appendFile(filename, data, [options], <span class="keyword">callback</span>)
+  <span class="comment">// 同步方式添加</span>
+  fs.appendFileSync(filename, data, [options])
+</code></pre><p>  options 中的 flag 和 encoding 与上同。</p>
+<p>  options 中的 mode 为表示读写权限的数字，默认为 0666 可读写</p>
+<p>  写入的 data 可以是一个 Buffer    </p>
+</li>
+<li><p>在指定位置读写文件</p>
+<pre><code>  fs.<span class="built_in">open</span>(filename, flags, [mode], <span class="function"><span class="keyword">function</span> (<span class="title">err</span>, <span class="title">fd</span>){</span>
+     <span class="comment"> // 读</span>
+      fs.<span class="built_in">read</span>(fd, buffer, <span class="built_in">offset</span>, <span class="built_in">length</span>, position, <span class="function"><span class="keyword">function</span>(<span class="title">err</span>, <span class="title">bytesRead</span>, <span class="title">buffer</span>){})</span>
+     <span class="comment"> // 写</span>
+      fs.<span class="built_in">write</span>(fd, buffer, <span class="built_in">offset</span>, <span class="built_in">length</span>, position, <span class="function"><span class="keyword">function</span>(<span class="title">err</span>, <span class="title">written</span>, <span class="title">buffer</span>){})</span>
+     <span class="comment"> // 关闭</span>
+      fs.<span class="built_in">close</span>(fd)
+  })
+</code></pre></li>
+</ul>
+<ul>
+<li><p>创建目录</p>
+<pre><code>  <span class="comment">// fs.mkdir(path, [mode], callback)</span>
+  <span class="comment">// mode 默认为 0777，表示可读可写</span>
+  fs.mkdir(<span class="string">'./testDir'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="keyword">throw</span> err;
+      }
+      <span class="built_in">console</span>.log(<span class="string">'目录创建成功'</span>)
+  })    
+</code></pre></li>
+<li><p>读取目录</p>
+<pre><code>  fs.readdir(<span class="string">'./testDir'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, files)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="built_in">console</span>.log(<span class="string">'读取目录失败'</span>)
+      }
+      <span class="built_in">console</span>.log(files);
+  })    
+</code></pre></li>
+<li><p>查看文件/目录信息</p>
+<pre><code>  <span class="comment">// fs.fstat('testDir', function (err, stats) {</span>
+  fs.stat(<span class="string">'testFile.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, stats)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="built_in">console</span>.log(<span class="string">'读取文件信息失败'</span>)
+      }            
+      <span class="comment">// stats 是一个 Fs.Stats 对象</span>
+      <span class="built_in">console</span>.log(stats);
+
+      <span class="built_in">console</span>.log(<span class="string">'是否为文件：'</span>, stats.isFile);
+      <span class="built_in">console</span>.log(<span class="string">'是否为目录：'</span>, stats.isDictionary);
+      <span class="built_in">console</span>.log(<span class="string">'读写权限是：'</span>, stats.mode);
+      <span class="built_in">console</span>.log(<span class="string">'文件大小是：'</span>, stats.size);
+      <span class="built_in">console</span>.log(<span class="string">'访问时间是：'</span>, stats.atime);
+      <span class="built_in">console</span>.log(<span class="string">'修改时间是：'</span>, stats.mtime);
+      <span class="built_in">console</span>.log(<span class="string">'创建时间是：'</span>, stats.ctime);
+  })    
+</code></pre></li>
+<li><p>检查文件/目录是否存在</p>
+<pre><code>  fs.<span class="built_in">exists</span>(<span class="string">'./testFile.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(exists)</span> {</span>
+      console.<span class="built_in">log</span>(<span class="string">'testFile.txt是否存在：'</span>, <span class="built_in">exists</span>);
+  })    
+</code></pre></li>
+<li><p>获取文件的绝对路径</p>
+<pre><code>  fs.realpath(<span class="string">'./testFile.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, resolvedPath)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="keyword">throw</span> err;
+      }
+      <span class="built_in">console</span>.log(<span class="string">'文件的绝对路径是：'</span>, resolvedPath);
+  })
+</code></pre></li>
+<li><p>修改文件时间</p>
+<pre><code>  <span class="comment">// fs.utimes(path, atime, mtime, callback)</span>
+  fs.utimes(<span class="string">'./testFile.txt'</span>, <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="built_in">console</span>.log(<span class="string">'修改失败'</span>)
+      }
+      <span class="built_in">console</span>.log(<span class="string">'修改成功'</span>);
+  })    
+</code></pre></li>
+<li><p>修改文件/目录的读取权限</p>
+<pre><code>  <span class="comment">// fs.chmod(path, mode, callback)</span>
+  <span class="comment">// 0600 表示所有者可读写，其他人不可</span>
+  fs.chmod(<span class="string">'./testFile.txt'</span>, <span class="number">0600</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="built_in">console</span>.log(<span class="string">'修改失败'</span>);
+      }
+      <span class="built_in">console</span>.log(<span class="string">'修改成功'</span>);
+  })
+</code></pre></li>
+<li><p>移动/重命名文件</p>
+<pre><code>  <span class="comment">// fs.rename(oldPath, newPath, callback);        // oldPath 与 newPath 所在目录相同但文件名不同时，重命名</span>
+  <span class="comment">// oldPath 与 newPath 所在目录不相同时，移动；若文件名不同，则移动后重命名</span>
+  fs.rename(<span class="string">'./testFile.txt'</span>, <span class="string">'./test/testNewFile.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="built_in">console</span>.log(<span class="string">'文件移动失败'</span>);        
+      }
+      <span class="built_in">console</span>.log(<span class="string">'文件移动成功'</span>);
+  })
+</code></pre></li>
+<li><p>创建和删除硬连接</p>
+<p>  新创建的硬连接与旧的硬连接会指向相同文件</p>
+<p>  删除的硬连接若是最后一个，则删除这个文件</p>
+<pre><code>  <span class="comment">// 创建</span>
+  <span class="comment">// fs.link(srcPath, dstPath, callback);</span>
+  fs.line(<span class="string">'./testFile.txt'</span>, <span class="string">'./test/testNewFile.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>{
+      <span class="keyword">if</span> (err) {
+          <span class="built_in">console</span>.log(<span class="string">'创建硬连接失败'</span>);
+      }
+      <span class="built_in">console</span>.log(<span class="string">'创建硬连接成功'</span>);
+  })    
+  <span class="comment">// 删除</span>
+  fs.unlink(path, callback);
+</code></pre></li>
+<li><p>截断文件</p>
+<p>  清除文件内容，后修改文件尺寸的操作</p>
+<pre><code>  fs.truncate(filename, len, <span class="keyword">callback</span>)
+</code></pre></li>
+<li><p>删除空目录</p>
+<pre><code>  fs.rmdir(path, <span class="keyword">callback</span>);
+</code></pre></li>
+<li><p>监视文件/目录</p>
+<pre><code>  <span class="comment">// fs.watchFile(filename, [options], listener)</span>
+  <span class="comment">// options 中的 interval 指多久检查一次，这里设定了 1小时</span>
+  fs.watchFile(<span class="string">'./testFile.txt'</span>, {interval: <span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>}, <span class="function"><span class="keyword">function</span> <span class="params">(curr, prev)</span> </span>{
+      <span class="keyword">if</span> (<span class="built_in">Date</span>.parse(prev.ctime) == <span class="number">0</span>) {
+          <span class="built_in">console</span>.log(<span class="string">'文件被创建'</span>);
+      } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Date</span>.parse(curr.ctime) == <span class="number">0</span>) {
+          <span class="built_in">console</span>.log(<span class="string">'文件被删除'</span>);
+      } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Date</span>.parse(prev.mtime) != <span class="built_in">Date</span>.parse(curr.mtime)
+          <span class="built_in">console</span>.log(<span class="string">'文件被修改'</span>);
+      })
+  })            
+  <span class="comment">// 取消监视, 不指定listener则清空所有监视</span>
+  fs.unwatchFile(filename, [listener])
+</code></pre></li>
+<li><p>使用 ReadStream对象 读取文件</p>
+<pre><code>  // 创建
+  // fs.createReadStream(path, [<span class="keyword">options</span>])
+  // <span class="keyword">options</span> 可填的key有：flags/encoding/autoClose/start/end
+  var <span class="keyword">file</span> = fs.createReadStream(<span class="string">'./testFile.txt'</span>);
+  var body = <span class="string">''</span>;
+  // 监听
+  <span class="keyword">file</span>.<span class="keyword">on</span>(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(fd)</span> {</span>
+      console.<span class="built_in">log</span>(<span class="string">'文件被打开，开始读取...'</span>);
+  });
+  <span class="keyword">file</span>.<span class="keyword">on</span>(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+      console.<span class="built_in">log</span>(<span class="string">'正在读取数据...'</span>);
+      body += data;
+  });
+  <span class="keyword">file</span>.<span class="keyword">on</span>(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+      console.<span class="built_in">log</span>(<span class="string">'文件被读取完毕：'</span>);
+      console.<span class="built_in">log</span>(body);
+  });
+  <span class="keyword">file</span>.<span class="keyword">on</span>(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+      console.<span class="built_in">log</span>(<span class="string">'文件已关闭'</span>);
+  })
+  <span class="keyword">file</span>.<span class="keyword">on</span>(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> {</span>
+      console.<span class="built_in">log</span>(<span class="string">'文件读取出错'</span>);
+  })
+
+  // 手动出发暂停/恢复读取文件
+  // <span class="keyword">file</span>.pause();
+  // <span class="keyword">file</span>.resume();
+</code></pre></li>
+<li><p>使用 WriteStream对象 写入文件</p>
+<pre><code>  <span class="comment">// 创建</span>
+  <span class="comment">// var writable = fs.createWriteStream(path, [options])</span>
+  <span class="comment">// options 可填的key有：flags/encoding/start</span>
+
+  <span class="comment">// writable.write(chunk, [encoding], [callback])        // chunk 可为 Buffer/string</span>
+
+  <span class="comment">// writable.end([chunk], [encoding], [callback])</span>
+  <span class="comment">// 调用end方法结束写入</span>
+
+  <span class="comment">// 将 file1.txt 的内容写入 file2.txt</span>
+  <span class="keyword">var</span> file1 = fs.createReadStream(<span class="string">'./file1.txt'</span>);
+  <span class="keyword">var</span> file2 = fs.creatWriteStream(<span class="string">'./file2.txt'</span>);
+  file1.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{
+      file2.write(data);
+  });
+  file1.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+      file2.end(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+          <span class="built_in">console</span>.log(<span class="string">'文件写入完成'</span>);
+          <span class="built_in">console</span>.log(<span class="string">'共写入的 %d 字节数据'</span>, file2.bytesWritten);
+      });
+  });        
+</code></pre></li>
+</ul>
+<pre><code>    <span class="comment">// 使用 pipe方法 写入数据</span>
+    <span class="comment">// readStream.pipe(destination, [options])</span>
+    <span class="keyword">var</span> file1 = fs.createReadStream(<span class="string">'./file1.txt'</span>);
+    <span class="keyword">var</span> file2 = fs.createWriteStream(<span class="string">'./file2.txt'</span>);
+    <span class="comment">// options 中的 end 设置为 false 表示不会自动关闭文件</span>
+    file1.pipe(file2, {end: <span class="literal">false</span>});
+    <span class="comment">// 手动关闭</span>
+    file1.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+        <span class="comment">// 这样可以继续写入数据再关闭</span>
+        file2.end(<span class="string">'我是被继续写入的数据'</span>);
+    });
+
+    <span class="comment">// 取消写入</span>
+    <span class="comment">// readStream.unpipe([destination])</span>
+</code></pre><h2 id="使用_path模块_对路径进行操作">使用 path模块 对路径进行操作</h2>
+<pre><code>    <span class="comment">// 将非标准路径转化为标准路径</span>
+    <span class="keyword">var</span> unStdPath = <span class="string">'./..//testFile.txt'</span>;
+    <span class="keyword">var</span> stdPath = path.normalize(unStdPath);
+
+    <span class="comment">// 将多个字符串拼接</span>
+    <span class="keyword">var</span> newPath = path.<span class="keyword">join</span>(__dirname, <span class="string">'aaa'</span>, <span class="string">'bbb'</span>, <span class="string">'ccc'</span>);
+
+    <span class="comment">// 解析出绝对路径</span>
+    path.resolve(path1, [path2])    
+
+    <span class="comment">// 找出两个路径间的关系</span>
+    path.relative(<span class="keyword">from</span>, <span class="keyword">to</span>)
+
+    <span class="comment">// 获取某路径中的目录名</span>
+    path.dirname(path1)
+
+    <span class="comment">// 获取某路径中的文件名，去除 ext后缀        </span>
+    path.basename(path1, [ext])
+
+    <span class="comment">// 获取某路径中的拓展名</span>
+    path.extname(path1)
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <!--
+      <a data-url="http://laispace.github.io/2014/05/nodejs-fs模块操作文件系统/" data-id="lzvf0r1xuum209ih" class="article-share-link">Share</a>
+      -->
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fs/">fs</a><span class="article-tag-list-count">2</span></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/path/">path</a><span class="article-tag-list-count">1</span></li></ul>
+
+      
+      <section id="comments">
+        <div class="ds-thread" data-thread-key="lzvf0r1xuum209ih" data-title="NODEJS-fs模块操作文件系统" data-url="http://laispace.github.io/2014/05/nodejs-fs模块操作文件系统/"></div>
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"laispace"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      </section>
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/05/grunt_学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          grunt 学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/05/nodejs-buffer对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NODEJS-Buffer对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/12/JavaScript 碎片/">JavaScript 碎片</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/移动 Web 开发技巧/">移动 Web 开发技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/Web-worker-的简单使用/">Web worker 的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/常用字符集和编码格式/">常用字符集和编码格式</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/【译】ES6 Generators（4）并发篇/">【译】ES6 Generators（4）并发篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/-crawler-spider/" style="font-size: 10.00px;">-crawler -spider</a><a href="/tags/-linux/" style="font-size: 10.00px;">-linux</a><a href="/tags/Child-process/" style="font-size: 10.00px;">Child_process</a><a href="/tags/Cluster/" style="font-size: 10.00px;">Cluster</a><a href="/tags/ES6/" style="font-size: 20.00px;">ES6</a><a href="/tags/FormData/" style="font-size: 10.00px;">FormData</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/HTTP/" style="font-size: 10.00px;">HTTP</a><a href="/tags/HTTPS/" style="font-size: 10.00px;">HTTPS</a><a href="/tags/Mongo/" style="font-size: 10.00px;">Mongo</a><a href="/tags/NPM/" style="font-size: 10.00px;">NPM</a><a href="/tags/Node/" style="font-size: 15.00px;">Node</a><a href="/tags/Node-modules/" style="font-size: 10.00px;">Node modules</a><a href="/tags/Notes/" style="font-size: 15.00px;">Notes</a><a href="/tags/Notification/" style="font-size: 10.00px;">Notification</a><a href="/tags/Phonegap/" style="font-size: 10.00px;">Phonegap</a><a href="/tags/SAE/" style="font-size: 10.00px;">SAE</a><a href="/tags/Tools/" style="font-size: 10.00px;">Tools</a><a href="/tags/Ubuntu/" style="font-size: 10.00px;">Ubuntu</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/animate/" style="font-size: 10.00px;">animate</a><a href="/tags/async/" style="font-size: 10.00px;">async</a><a href="/tags/base64/" style="font-size: 10.00px;">base64</a><a href="/tags/blur/" style="font-size: 10.00px;">blur</a><a href="/tags/buffer/" style="font-size: 15.00px;">buffer</a><a href="/tags/bytewiser/" style="font-size: 10.00px;">bytewiser</a><a href="/tags/clearSelect/" style="font-size: 10.00px;">clearSelect</a><a href="/tags/concat-stream/" style="font-size: 10.00px;">concat-stream</a><a href="/tags/cookies/" style="font-size: 10.00px;">cookies</a><a href="/tags/css3/" style="font-size: 10.00px;">css3</a><a href="/tags/debug/" style="font-size: 10.00px;">debug</a><a href="/tags/dns/" style="font-size: 10.00px;">dns</a><a href="/tags/express/" style="font-size: 10.00px;">express</a><a href="/tags/fileupload/" style="font-size: 10.00px;">fileupload</a><a href="/tags/filter/" style="font-size: 10.00px;">filter</a><a href="/tags/flex/" style="font-size: 10.00px;">flex</a><a href="/tags/fs/" style="font-size: 15.00px;">fs</a><a href="/tags/generators/" style="font-size: 20.00px;">generators</a><a href="/tags/git/" style="font-size: 10.00px;">git</a><a href="/tags/goagent/" style="font-size: 10.00px;">goagent</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 赖小赖<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+<!--     <nav id="mobile-nav">
+  
+    <a href="/git" class="mobile-nav-link">GIT</a>
+  
+    <a href="/web" class="mobile-nav-link">WEB</a>
+  
+    <a href="/codereading" class="mobile-nav-link">SVN</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    
+
+<script src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>正则表达式 | Laispace - 来思碑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="先来几个栗子：
+    // \b 表示匹配一个位置：单词开头或结尾
+    \bhi\b        //=&gt; hi
+
+    // . 匹配除换行符以外的任意字符
+    // * 匹配多次
+    // .* 匹配任意数量的不包含换行的字符
+    \bhi\b.*\bLucy\b    //=&gt; hi i love you Lucy        
+
+    // \d 匹配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://laispace.github.io/2014/07/正则表达式/">
+<meta property="og:site_name" content="Laispace - 来思碑">
+<meta property="og:description" content="先来几个栗子：
+    // \b 表示匹配一个位置：单词开头或结尾
+    \bhi\b        //=&gt; hi
+
+    // . 匹配除换行符以外的任意字符
+    // * 匹配多次
+    // .* 匹配任意数量的不包含换行的字符
+    \bhi\b.*\bLucy\b    //=&gt; hi i love you Lucy        
+
+    // \d 匹配">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式">
+<meta name="twitter:description" content="先来几个栗子：
+    // \b 表示匹配一个位置：单词开头或结尾
+    \bhi\b        //=&gt; hi
+
+    // . 匹配除换行符以外的任意字符
+    // * 匹配多次
+    // .* 匹配任意数量的不包含换行的字符
+    \bhi\b.*\bLucy\b    //=&gt; hi i love you Lucy        
+
+    // \d 匹配">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Laispace - 来思碑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Laispace - 来思碑</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">天酬勤笨先飞，乐观进取。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <ul class="category-list">
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/git">GIT</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/web">WEB</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/codereading">SVN</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/archives">归档</a>
+            </li>
+          
+            <li class="category-list-item">
+                  <a class="category-list-link" href="/about">关于</a>
+            </li>
+          
+        </ul>
+
+<!--         
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+         -->
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+          <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://laispace.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/正则表达式/" class="article-date">
+  <time datetime="2014-07-17T14:35:28.000Z" itemprop="datePublished">7月 17 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Node/">Node<span class="article-category-count">25</span></a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-number">1.</span> <span class="toc-text">参考链接</span></a></li></ol>
+        <p>先来几个栗子：</p>
+<pre><code>    <span class="comment">// \b 表示匹配一个位置：单词开头或结尾</span>
+    \bhi\b        <span class="comment">//=&gt; hi</span>
+
+    <span class="comment">// . 匹配除换行符以外的任意字符</span>
+    <span class="comment">// * 匹配多次</span>
+    <span class="comment">// .* 匹配任意数量的不包含换行的字符</span>
+    \bhi\b.*\bLucy\b    <span class="comment">//=&gt; hi i love you Lucy        </span>
+
+    <span class="comment">// \d 匹配一位数字</span>
+    <span class="comment">// {2} 匹配2次</span>
+    <span class="number">0</span>\d{<span class="number">2</span>}-\d{<span class="number">8</span>}   <span class="comment">//=&gt; 086-13800138000</span>
+
+    <span class="comment">// \s 匹配任意的空白符，包括空格、制表符、换行符、中文全角空格</span>
+    <span class="comment">// \w 匹配字母或数字或下划线或汉字</span>
+    \ba\w*\b    <span class="comment">//=&gt; ahdh256hvc</span>
+
+    <span class="comment">// + 匹配一次或多次，注意与 * 的区别（匹配多次）</span>
+    <span class="comment">// \d+ 匹配1个或多个连续的数字</span>
+    \d+        <span class="comment">//=&gt; 4 或 465435</span>
+    \d*        <span class="comment">//=&gt; 465435</span>
+
+    <span class="comment">// ^ 匹配字符串的开始</span>
+    <span class="comment">// $ 匹配字符串的结束</span>
+    ^\d{<span class="number">5</span>,<span class="number">12</span>}$         <span class="comment">//=&gt; 匹配5-12位的数字</span>
+
+    <span class="comment">// [] 匹配里边的值</span>
+    [aeiou]     <span class="comment">//=&gt; 匹配 a e i o u</span>
+    [<span class="number">0</span>-<span class="number">9</span>]        <span class="comment">//=&gt; 与 \d 同义</span>
+
+    <span class="comment">// | 表示分支</span>
+    <span class="number">0</span>\d{<span class="number">2</span>}-\d{}<span class="number">8</span>|<span class="number">0</span>\d{<span class="number">3</span>}-\d{<span class="number">7</span>}    =&gt; 匹配 <span class="number">010</span>-<span class="number">12345678</span> 或 <span class="number">0102</span>-<span class="number">1234567</span>
+
+    <span class="comment">// () 表示分组</span>
+    (\d{<span class="number">1</span>,<span class="number">3</span>}\.){<span class="number">3</span>}\d{<span class="number">1</span>,<span class="number">3</span>}    <span class="comment">//=&gt; 匹配一个IP，如 12.345.67.89</span>
+    <span class="comment">// 以上会匹配不合法的IP，如 256.777.888.999</span>
+
+    <span class="comment">// 大写字母 或 [^xxxx] 表示反义</span>
+    \S+            <span class="comment">//=&gt; 匹配不包含空白符的字符串</span>
+    &lt;lai[^&gt;]+&gt;    <span class="comment">//=&gt; 匹配 &lt;laispace&gt;</span>
+
+    <span class="comment">// (?=exp) 零宽度正预测先行断言，即自身出现的位置后面能匹配 exp</span>
+    \b\w+(?=ing\b) <span class="comment">//=&gt; 查找 I'm reading a book 时匹配 read</span>
+
+    <span class="comment">// (?&lt;=exp)零宽度正回顾后发断言，即自身出现的位置前面能匹配 exp</span>
+    (?&lt;=\bre)\w+ <span class="comment">//=&gt; 查找 I'm reading a book 时匹配 ading</span>
+
+    <span class="comment">// (?!exp)负向零宽断言，即此位置的后面不能匹配 exp</span>
+    \d{<span class="number">3</span>}(?!\d)        <span class="comment">//=&gt; 匹配三个数字，但这三个数字后不能是数字，如 123abcd</span>
+
+    <span class="comment">// (?&lt;!exp)零宽度负回顾后发断言，即此位置的前面不能匹配 exp</span>
+    (?&lt;![a-z])\d{<span class="number">7</span>}        <span class="comment">//=&gt; 匹配前面不是小写字母的七位数字</span>
+</code></pre><a id="more"></a>        
+
+
+<p>元字符</p>
+<pre><code>.        匹配除换行符以外的任意字符
+<span class="command">\w</span>        匹配字母或数字或下划线或汉字
+<span class="command">\s</span>        匹配任意的空白符
+<span class="command">\d</span>        匹配数字
+<span class="command">\b</span>        匹配单词的开始或结束
+^        匹配字符串的开始
+<span class="formula">$        匹配字符串的结束</span>
+</code></pre><p>反义</p>
+<pre><code><span class="command">\W</span>    匹配任意不是字母，数字，下划线，汉字的字符
+<span class="command">\S</span>    匹配任意不是空白符的字符
+<span class="command">\D</span>    匹配任意非数字的字符
+<span class="command">\B</span>    匹配不是单词开头或结束的位置
+<span class="special">[</span>^x<span class="special">]</span>    匹配除了x以外的任意字符
+<span class="special">[</span>^aeiou<span class="special">]</span>    匹配除了aeiou这几个字母以外的任意字符    
+</code></pre><p>重复    </p>
+<pre><code>*        重复零次或更多次
++        重复一次或更多次
+?        重复零次或一次
+<span class="list">{n}</span>        重复n次
+<span class="list">{n,}</span>    重复n次或更多次
+<span class="list">{n,m}</span>    重复n到m次    
+</code></pre><p>懒惰</p>
+<pre><code>*?    重复任意次，但尽可能少重复
++?    重复<span class="number">1</span>次或更多次，但尽可能少重复
+??    重复<span class="number">0</span>次或<span class="number">1</span>次，但尽可能少重复
+<span class="list">{n,m}</span>?    重复n到m次，但尽可能少重复
+<span class="list">{n,}</span>?    重复n次以上，但尽可能少重复    
+</code></pre><h3 id="参考链接">参考链接</h3>
+<ul>
+<li><p><a href="http://deerchao.net/tutorials/regex/regex.htm#mission" target="_blank" rel="external">正则表达式30分钟入门教程</a></p>
+</li>
+<li><p><a href="http://www.regular-expressions.info/quickstart.html" target="_blank" rel="external">Regular Expressions Quick Start</a>        </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!--
+      <a data-url="http://laispace.github.io/2014/07/正则表达式/" data-id="aa5ukflyedbrv3m0" class="article-share-link">Share</a>
+      -->
+      
+      
+      <section id="comments">
+        <div class="ds-thread" data-thread-key="aa5ukflyedbrv3m0" data-title="正则表达式" data-url="http://laispace.github.io/2014/07/正则表达式/"></div>
+      <script type="text/javascript">
+      var duoshuoQuery = {short_name:"laispace"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+           || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+      </section>
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/07/momentjs-学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          moment.js 学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/07/Velocity-学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Velocity 学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/12/JavaScript 碎片/">JavaScript 碎片</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/移动 Web 开发技巧/">移动 Web 开发技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/Web-worker-的简单使用/">Web worker 的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/常用字符集和编码格式/">常用字符集和编码格式</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/【译】ES6 Generators（4）并发篇/">【译】ES6 Generators（4）并发篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hybrid/">Hybrid</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Translate/">Translate</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后台编程/">后台编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/好文阅读/">好文阅读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/来思碑记/">来思碑记</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每日一发/">每日一发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎片积累/">碎片积累</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/-crawler-spider/" style="font-size: 10.00px;">-crawler -spider</a><a href="/tags/-linux/" style="font-size: 10.00px;">-linux</a><a href="/tags/Child-process/" style="font-size: 10.00px;">Child_process</a><a href="/tags/Cluster/" style="font-size: 10.00px;">Cluster</a><a href="/tags/ES6/" style="font-size: 20.00px;">ES6</a><a href="/tags/FormData/" style="font-size: 10.00px;">FormData</a><a href="/tags/HTML5/" style="font-size: 10.00px;">HTML5</a><a href="/tags/HTTP/" style="font-size: 10.00px;">HTTP</a><a href="/tags/HTTPS/" style="font-size: 10.00px;">HTTPS</a><a href="/tags/Mongo/" style="font-size: 10.00px;">Mongo</a><a href="/tags/NPM/" style="font-size: 10.00px;">NPM</a><a href="/tags/Node/" style="font-size: 15.00px;">Node</a><a href="/tags/Node-modules/" style="font-size: 10.00px;">Node modules</a><a href="/tags/Notes/" style="font-size: 15.00px;">Notes</a><a href="/tags/Notification/" style="font-size: 10.00px;">Notification</a><a href="/tags/Phonegap/" style="font-size: 10.00px;">Phonegap</a><a href="/tags/SAE/" style="font-size: 10.00px;">SAE</a><a href="/tags/Tools/" style="font-size: 10.00px;">Tools</a><a href="/tags/Ubuntu/" style="font-size: 10.00px;">Ubuntu</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/animate/" style="font-size: 10.00px;">animate</a><a href="/tags/async/" style="font-size: 10.00px;">async</a><a href="/tags/base64/" style="font-size: 10.00px;">base64</a><a href="/tags/blur/" style="font-size: 10.00px;">blur</a><a href="/tags/buffer/" style="font-size: 15.00px;">buffer</a><a href="/tags/bytewiser/" style="font-size: 10.00px;">bytewiser</a><a href="/tags/clearSelect/" style="font-size: 10.00px;">clearSelect</a><a href="/tags/concat-stream/" style="font-size: 10.00px;">concat-stream</a><a href="/tags/cookies/" style="font-size: 10.00px;">cookies</a><a href="/tags/css3/" style="font-size: 10.00px;">css3</a><a href="/tags/debug/" style="font-size: 10.00px;">debug</a><a href="/tags/dns/" style="font-size: 10.00px;">dns</a><a href="/tags/express/" style="font-size: 10.00px;">express</a><a href="/tags/fileupload/" style="font-size: 10.00px;">fileupload</a><a href="/tags/filter/" style="font-size: 10.00px;">filter</a><a href="/tags/flex/" style="font-size: 10.00px;">flex</a><a href="/tags/fs/" style="font-size: 15.00px;">fs</a><a href="/tags/generators/" style="font-size: 20.00px;">generators</a><a href="/tags/git/" style="font-size: 10.00px;">git</a><a href="/tags/goagent/" style="font-size: 10.00px;">goagent</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">May 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 赖小赖<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+<!--     <nav id="mobile-nav">
+  
+    <a href="/git" class="mobile-nav-link">GIT</a>
+  
+    <a href="/web" class="mobile-nav-link">WEB</a>
+  
+    <a href="/codereading" class="mobile-nav-link">SVN</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    
+
+<script src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
