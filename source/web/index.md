@@ -2,6 +2,14 @@ title: 移动 Web 开发
 date: 2014-12-18 10:54:29
 ---
 
+# 坑总结
+
+- iOS 和 Android 中滚动元素的选择不同
+
+在 Android 中, 滚动元素必须设置为 window   
+    var $scroller = $.os.ios?$('#scroller-wrapper'):$(window);
+    // 滚动到顶部
+    $scroller.scrollTop(0);
 
 # 调试技巧
 
