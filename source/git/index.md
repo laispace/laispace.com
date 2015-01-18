@@ -182,6 +182,9 @@ HEAD指向的版本就是当前版本
     $ git push
 
 
+# 删除提交记录的办法
+git reset --hard HEAD~2 # 取消之前的两次提交
+git push origin HEAD --force # 强制提交到，删除之前的数据
 
 ### 参考资料
 
