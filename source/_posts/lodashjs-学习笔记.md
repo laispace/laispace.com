@@ -1,13 +1,10 @@
-title: 'lodash.js 学习笔记'
-
-tags: [lodash]	
-	
-
-date: 2014-07-13 10:28:49
+title: lodash.js 学习笔记
+tags:
+  - lodash
+categories: []
+date: 2014-07-13 10:28:00
 ---
-
 underscore.js 提供了一系列工具函数，而 lodash.js 可以认为是 underscore.js 的一个超集。
-
 
 简单示例：
 
@@ -39,11 +36,26 @@ _.findIndex(characters, { 'age': 36 });
 _.findIndex(characters, 'blocked');
 // → 1
 
+
+
+
 // 找出数组中相同的值
 _.intersection([1, 2, 3], [5, 2, 1, 4], [2, 1]);
 // → [1, 2]
 
-// 找出数组中最后的值
+//   找出数组的前 n 个元素 
+_.first([1, 2, 3]);
+// → 1
+
+_.first([1, 2, 3], 2);
+// → [1, 2]
+
+_.first([1, 2, 3], function(num) {
+  return num < 3;
+});
+// → [1, 2]
+
+// 找出数组中最后 n 个元素
 _.last([1, 2, 3]);
 // → 3
 _.last([1, 2, 3], 2);
@@ -53,7 +65,13 @@ _.last([1, 2, 3], function(num) {
 });
 // → [2, 3]
 
-// 找出某个值最后出现的索引
+// 找出数组中某个元素的索引
+_.indexOf([1, 2, 3, 1, 2, 3], 2);
+// → 1
+_.indexOf([1, 2, 3, 1, 2, 3], 2, 3);
+// → 4
+_.indexOf([1, 1, 2, 2, 3, 3], 2, true);
+// → 2
 _.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
 // → 4
 // 从 第三个元素开始
@@ -100,6 +118,20 @@ _.rest([1, 2, 3], function(num) {
 });
 // → [3]
 
+
+// 将多层嵌套的数组变成一层
+_.flatten([1, [2], [3, [[4]]]]);
+// → [1, 2, 3, 4];
+var characters = [
+  { 'name': 'barney', 'age': 30, 'pets': ['hoppy'] },
+  { 'name': 'fred',   'age': 40, 'pets': ['baby puss', 'dino'] }
+];
+// using "_.pluck" callback shorthand
+_.flatten(characters, 'pets');
+// → ['hoppy', 'baby puss', 'dino']
+
+
+
 // 更多实用函数见 http://lodash.com/docs
 
 ```
@@ -114,5 +146,3 @@ _.rest([1, 2, 3], function(num) {
 - [Underscore.js 中文](http://javascript.ruanyifeng.com/library/underscore.html)
 - [Say "Hello" to Lo-Dash](http://kitcambridge.be/blog/say-hello-to-lo-dash/)
 -  [Differences between lodash and underscore](http://stackoverflow.com/questions/13789618/differences-between-lodash-and-underscore)
-
-
